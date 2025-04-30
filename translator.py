@@ -54,7 +54,43 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi("translator_ui.ui", self)
-        self.setWindowTitle("AI Translator by mochabrie")
+        self.setWindowTitle("AI 번역기")
+
+        # 연결: 글자 수 표시
+        self.inputTextEdit.textChanged.connect(self.update_input_char_count)
+        self.outputTextEdit.textChanged.connect(self.update_output_char_count)
+
+        # 연결: 언어 동일 시 자동 교환
+        self.inputLangCombo.currentTextChanged.connect(self.handle_lang_change)
+        self.outputLangCombo.currentTextChanged.connect(self.handle_lang_change)
+
+        # 연결: ⇄ 버튼
+        self.swapLangButton.clicked.connect(self.swap_languages)
+
+        # 초기 글자 수 표시
+        self.update_input_char_count()
+        self.update_output_char_count()
+
+    def update_input_char_count(self):
+        text = self.inputTextEdit.toPlainText()
+        self.inputCharCount.setText(f"{len(text)}자 입력됨")
+
+    def update_output_char_count(self):
+        text = self.outputTextEdit.toPlainText()
+        self.outputCharCount.setText(f"{len(text)}자 출력됨")
+
+    def handle_lang_change(self):
+        in_lang = self.inputLangCombo.currentText()
+        out_lang = self.outputLangCombo.currentText()
+        if in_lang == out_lang:
+            self.inputLangCombo.setCurrentText(out_lang)
+            self.outputLangCombo.setCurrentText(in_lang)
+
+    def swap_languages(self):
+        in_index = self.inputLangCombo.currentIndex()
+        out_index = self.outputLangCombo.currentIndex()
+        self.inputLangCombo.setCurrentIndex(out_index)
+        self.outputLangCombo.setCurrentIndex(in_index)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

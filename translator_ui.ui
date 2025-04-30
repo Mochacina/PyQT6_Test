@@ -73,10 +73,16 @@
      </widget>
      <widget class="QLabel" name="inputCharCount">
       <property name="geometry">
-       <rect><x>700</x><y>320</y><width>140</width><height>20</height></rect>
+       <rect><x>740</x><y>290</y><width>100</width><height>20</height></rect>
       </property>
       <property name="text">
        <string>0자 입력됨</string>
+      </property>
+      <property name="autoFillBackground">
+        <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+        <string>background: transparent;</string>
       </property>
      </widget>
 
@@ -87,10 +93,16 @@
      </widget>
      <widget class="QLabel" name="outputCharCount">
       <property name="geometry">
-       <rect><x>700</x><y>610</y><width>140</width><height>20</height></rect>
+       <rect><x>740</x><y>570</y><width>100</width><height>20</height></rect>
       </property>
       <property name="text">
        <string>0자 출력됨</string>
+      </property>
+      <property name="autoFillBackground">
+        <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+        <string>background: transparent;</string>
       </property>
      </widget>
     </widget>
