@@ -55,6 +55,11 @@ class MainWindow(QMainWindow):
         super().__init__()
         uic.loadUi("translator_ui.ui", self)
         self.setWindowTitle("AI 번역기")
+        
+        # inputLangCombo 기본값, 변수 설정
+        self.inputLangCombo.setCurrentIndex(1)
+        self.inputLang = self.inputLangCombo.currentText()
+        self.outputLang = self.outputLangCombo.currentText()
 
         # 연결: 글자 수 표시
         self.inputTextEdit.textChanged.connect(self.update_input_char_count)
@@ -83,8 +88,10 @@ class MainWindow(QMainWindow):
         in_lang = self.inputLangCombo.currentText()
         out_lang = self.outputLangCombo.currentText()
         if in_lang == out_lang:
-            self.inputLangCombo.setCurrentText(out_lang)
-            self.outputLangCombo.setCurrentText(in_lang)
+            self.inputLangCombo.setCurrentText(self.outputLang)
+            self.outputLangCombo.setCurrentText(self.inputLang)
+        self.inputLang = self.inputLangCombo.currentText()
+        self.outputLang = self.outputLangCombo.currentText()
 
     def swap_languages(self):
         in_index = self.inputLangCombo.currentIndex()
