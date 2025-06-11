@@ -58,8 +58,9 @@ class MainWindow(QMainWindow):
         
         # inputLangCombo 기본값, 변수 설정
         self.inputLangCombo.setCurrentIndex(1)
-        self.inputLang = self.inputLangCombo.currentText()
-        self.outputLang = self.outputLangCombo.currentText()
+        self.inputIndex = self.inputLangCombo.currentIndex()
+        self.outputIndex = self.outputLangCombo.currentIndex()
+        print("inputIndex=", self.inputIndex, "outputIndex=", self.outputIndex)
 
         # 연결: 글자 수 표시
         self.inputTextEdit.textChanged.connect(self.update_input_char_count)
@@ -85,13 +86,15 @@ class MainWindow(QMainWindow):
         self.outputCharCount.setText(f"{len(text)}자 출력됨")
 
     def handle_lang_change(self):
-        in_lang = self.inputLangCombo.currentText()
-        out_lang = self.outputLangCombo.currentText()
+        in_lang = self.inputLangCombo.currentIndex()
+        out_lang = self.outputLangCombo.currentIndex()
+        print("in_lang=", in_lang, "out_lang=", out_lang)
         if in_lang == out_lang:
-            self.inputLangCombo.setCurrentText(self.outputLang)
-            self.outputLangCombo.setCurrentText(self.inputLang)
-        self.inputLang = self.inputLangCombo.currentText()
-        self.outputLang = self.outputLangCombo.currentText()
+            self.inputLangCombo.setCurrentIndex(self.outputIndex)
+            self.outputLangCombo.setCurrentIndex(self.inputIndex)
+        else:
+            self.inputIndex = self.inputLangCombo.currentIndex()
+            self.outputIndex = self.outputLangCombo.currentIndex()
 
     def swap_languages(self):
         in_index = self.inputLangCombo.currentIndex()
